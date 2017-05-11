@@ -18,12 +18,22 @@ module.exports = function(grunt) {
 		openui5_preload: {
 			library: {
 				options: {
-					resources: '<%= dir.src %>',
+					resources: [
+						{ cwd: '<%= dir.src %>' },
+						{ cwd: 'node_modules/qrcode-generator', prefix: 'node_modules/qrcode-generator' }
+					],
 					dest: '<%= dir.dest %>',
 					compatVersion: '1.44',
 					compress: false
 				},
-				libraries: 'it/designfuture/qrcode'
+				libraries: {
+					'it/designfuture/qrcode': {
+						src: [
+							'it/designfuture/qrcode/**',
+							'node_modules/qrcode-generator/qrcode.js'
+						]
+					}
+				}
 			}
 		}
 	});
